@@ -2,6 +2,7 @@
 using _104Crawler.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +15,18 @@ namespace _104Crawler.Controllers
     public class CrawlerController : ControllerBase
     {
         private readonly ICrawler _crawler;
+        private readonly ILogger<CrawlerController> _logger;
 
-        public CrawlerController(ICrawler crawler)
+        public CrawlerController(ICrawler crawler, ILogger<CrawlerController> logger)
         {
             _crawler = crawler;
+            _logger = logger;
         }
 
         [HttpPut]
         public IActionResult Put()
         {
             _crawler.Process();
-
             return Ok();
         }
     }
