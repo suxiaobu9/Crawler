@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Crawler
+namespace _104Crawler
 {
     public class Program
     {
