@@ -27,6 +27,7 @@ namespace _104Crawler.Controllers
         public IActionResult Put()
         {
             _crawler.Process();
+            _logger.LogInformation("Success");
             return Ok();
         }
     }

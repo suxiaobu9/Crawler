@@ -1,3 +1,4 @@
+using _104Crawler.Middleware;
 using _104Crawler.Model.Entity;
 using _104Crawler.Service;
 using Microsoft.AspNetCore.Builder;
@@ -39,6 +40,8 @@ namespace _104Crawler
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "_104Crawler v1"));
             }
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseHttpsRedirection();
 
