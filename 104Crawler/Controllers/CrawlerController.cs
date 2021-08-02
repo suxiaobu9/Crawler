@@ -26,8 +26,9 @@ namespace _104Crawler.Controllers
         [HttpPut]
         public IActionResult Put()
         {
+            _logger.LogInformation("Start");
             _crawler.Process();
-            _logger.LogInformation("Success");
+            _logger.LogInformation("Finish");
             return Ok();
         }
     }

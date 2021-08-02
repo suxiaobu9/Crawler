@@ -1,12 +1,9 @@
+using _104Crawler.Extension;
+using _104Crawler.Service;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using NLog.Web;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Quartz;
 
 namespace _104Crawler
 {
@@ -23,6 +20,16 @@ namespace _104Crawler
                 {
                     webBuilder.UseStartup<Startup>();
                 })
-                .UseNLog();
+                .ConfigureServices((hostContext, services) =>
+                {
+                    services.AddQuartz(q =>
+                    {
+                        q.UseMicrosoftDependencyInjectionJobFactory();
+                        q.AddJobAndTrigger<CrawlerJob>(hostContext.Configuration);
+                    });
+
+                    services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
+
+                }).UseNLog();
     }
 }
