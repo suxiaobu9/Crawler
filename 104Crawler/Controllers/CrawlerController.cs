@@ -26,9 +26,9 @@ namespace _104Crawler.Controllers
         [HttpPut]
         public IActionResult Put()
         {
-            _logger.LogInformation("Start");
+            _logger.LogInformation($"{DateTime.Now:yyyy/MM/dd HH:mm:ss} : Start");
             _crawler.Process();
-            _logger.LogInformation("Finish");
+            _logger.LogInformation($"{DateTime.Now:yyyy/MM/dd HH:mm:ss} : Finish");
             return Ok();
         }
     }

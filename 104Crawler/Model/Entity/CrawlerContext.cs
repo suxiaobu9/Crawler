@@ -1,6 +1,8 @@
 ﻿using System;
+using _104Crawler.Model.Appsettings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Options;
 
 #nullable disable
 
@@ -8,8 +10,10 @@ namespace _104Crawler.Model.Entity
 {
     public partial class CrawlerContext : DbContext
     {
-        public CrawlerContext()
+        private readonly DbConnections _dbConnections;
+        public CrawlerContext(IOptions<DbConnections> dbConnextions)
         {
+            _dbConnections = dbConnextions.Value;
         }
 
         public CrawlerContext(DbContextOptions<CrawlerContext> options)
@@ -24,8 +28,7 @@ namespace _104Crawler.Model.Entity
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("server=localhost,1433;database=JobCrawler;user=OneOFour;password=123456;");
+                optionsBuilder.UseSqlServer(_dbConnections.Default);
             }
         }
 

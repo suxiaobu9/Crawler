@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Quartz;
+using System;
 using System.Threading.Tasks;
 
 namespace _104Crawler.Service
@@ -18,11 +19,11 @@ namespace _104Crawler.Service
 
         public Task Execute(IJobExecutionContext context)
         {
-            _logger.LogInformation("Crawler Start");
+            _logger.LogInformation($"{DateTime.Now:yyyy/MM/dd HH:mm:ss} : Crawler Start");
 
             //_crawler.Process();
 
-            _logger.LogInformation("Crawler Finish");
+            _logger.LogInformation($"{DateTime.Now:yyyy/MM/dd HH:mm:ss} : Crawler Finish");
 
             return Task.CompletedTask;
         }

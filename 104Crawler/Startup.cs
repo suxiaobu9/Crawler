@@ -1,4 +1,5 @@
 using _104Crawler.Middleware;
+using _104Crawler.Model.Appsettings;
 using _104Crawler.Model.Entity;
 using _104Crawler.Service;
 using Microsoft.AspNetCore.Builder;
@@ -22,6 +23,8 @@ namespace _104Crawler
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<DbConnections>(Configuration.GetSection("ConnectionStrings"));
+
             services.AddTransient<CrawlerContext>();
             services.AddTransient<ICrawler, Crawler>();
             services.AddControllers();
