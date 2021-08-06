@@ -23,6 +23,10 @@ namespace JobCrawler.Controllers
             _jobService = jobService.First(x => x.CrawlerType == CrawlerEnum.Job);
         }
 
+        /// <summary>
+        /// API同步公司、職缺資料
+        /// </summary>
+        /// <returns></returns>
         [HttpPut]
         public IActionResult Put()
         {
