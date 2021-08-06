@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-
-namespace _104Crawler.Model
+﻿namespace Model.JobCrawler
 {
     public class JobResponseModel
     {
@@ -175,4 +168,5 @@ namespace _104Crawler.Model
         }
 
     }
+
 }

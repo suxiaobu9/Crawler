@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace _104Crawler.Model.Appsettings
+namespace Model
 {
-    public class DbConnections
+    public enum CrawlerEnum
     {
-        public string Default { get; set; }
+        Job,
+        Stock
     }
 }

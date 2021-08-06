@@ -1,13 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace _104Crawler.Middleware
+namespace JobCrawler.Middleware
 {
     public class ErrorHandlingMiddleware
     {
@@ -20,7 +16,7 @@ namespace _104Crawler.Middleware
             _logger = logger;
         }
 
-        public async Task Invoke(HttpContext context)
+        public async Task InvokeAsync(HttpContext context)
         {
             try
             {
@@ -36,4 +32,5 @@ namespace _104Crawler.Middleware
             }
         }
     }
+
 }

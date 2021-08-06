@@ -1,5 +1,6 @@
-﻿using _104Crawler.Model;
-using _104Crawler.Model.Entity;
+﻿using Model;
+using Model.JobCrawler;
+using Model.JobCrawler.Entity;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,15 +8,19 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace _104Crawler.Service
+namespace Service.JobCrawler
 {
-    public class Crawler : ICrawler
+    public class JobCrawlerService : ICrawlerService
     {
-        private readonly CrawlerContext _dbContext;
-        public Crawler(CrawlerContext crawlerContext)
+        public CrawlerEnum CrawlerType => CrawlerEnum.Job;
+
+        private readonly JobCrawlerContext _dbContext;
+
+        public JobCrawlerService(JobCrawlerContext context)
         {
-            _dbContext = crawlerContext;
+            _dbContext = context;
         }
 
         public void Process()
@@ -174,6 +179,7 @@ namespace _104Crawler.Service
             var info = JsonConvert.DeserializeObject<T>(response);
             return info;
         }
+
 
     }
 }

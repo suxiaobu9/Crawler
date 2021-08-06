@@ -1,35 +1,36 @@
-﻿using _104Crawler.Model;
-using _104Crawler.Service;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Model;
+using Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace _104Crawler.Controllers
+namespace JobCrawler.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CrawlerController : ControllerBase
+    public class JobCrawlerController : ControllerBase
     {
-        private readonly ICrawler _crawler;
-        private readonly ILogger<CrawlerController> _logger;
+        private readonly ILogger<JobCrawlerController> _logger;
+        private readonly ICrawlerService _jobService;
 
-        public CrawlerController(ICrawler crawler, ILogger<CrawlerController> logger)
+        public JobCrawlerController(ILogger<JobCrawlerController> logger, IEnumerable<ICrawlerService> jobService)
         {
-            _crawler = crawler;
             _logger = logger;
+            _jobService = jobService.First(x => x.CrawlerType == CrawlerEnum.Job);
         }
 
         [HttpPut]
         public IActionResult Put()
         {
             _logger.LogInformation($"{DateTime.Now:yyyy/MM/dd HH:mm:ss} : Start");
-            _crawler.Process();
+            _jobService.Process();
             _logger.LogInformation($"{DateTime.Now:yyyy/MM/dd HH:mm:ss} : Finish");
             return Ok();
         }
+
     }
 }

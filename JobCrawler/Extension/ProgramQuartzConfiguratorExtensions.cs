@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace _104Crawler.Extension
+namespace JobCrawler.Extension
 {
     public static class ProgramQuartzConfiguratorExtensions
     {
@@ -29,4 +29,5 @@ namespace _104Crawler.Extension
                                             .WithCronSchedule(cron));
         }
     }
+
 }
