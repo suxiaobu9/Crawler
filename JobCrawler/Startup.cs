@@ -25,7 +25,7 @@ namespace JobCrawler
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<DbConnections>(Configuration.GetSection("ConnectionStrings"));
-            services.AddTransient<JobCrawlerContext>();
+            services.AddTransient<JobCrawlerDb>();
             services.AddTransient<ICrawlerService, JobCrawlerService>();
 
             services.AddControllers();
