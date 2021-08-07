@@ -28,10 +28,10 @@ namespace JobCrawler.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPut]
-        public IActionResult Put()
+        public async Task<IActionResult> PutAsync()
         {
             _logger.LogInformation($"{DateTime.Now:yyyy/MM/dd HH:mm:ss} : Start");
-            _jobService.Process();
+            await _jobService.ProcessAsync();
             _logger.LogInformation($"{DateTime.Now:yyyy/MM/dd HH:mm:ss} : Finish");
             return Ok();
         }

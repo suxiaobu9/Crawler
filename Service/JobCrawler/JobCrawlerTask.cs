@@ -21,15 +21,14 @@ namespace Service.JobCrawler
             _jobService = jobService.FirstOrDefault(x => x.CrawlerType == CrawlerEnum.Job);
         }
 
-        public Task Execute(IJobExecutionContext context)
+        public async Task Execute(IJobExecutionContext context)
         {
             _logger.LogInformation($"{DateTime.Now:yyyy/MM/dd HH:mm:ss} : JobCrawler Start");
 
-            _jobService.Process();
+            await _jobService.ProcessAsync();
 
             _logger.LogInformation($"{DateTime.Now:yyyy/MM/dd HH:mm:ss} : JobCrawler Finish");
 
-            return Task.CompletedTask;
         }
     }
 }

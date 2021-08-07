@@ -17,6 +17,6 @@ namespace Service
         /// <summary>
         /// 執行爬蟲
         /// </summary>
-        public void Process();
+        public Task ProcessAsync();
     }
 }
