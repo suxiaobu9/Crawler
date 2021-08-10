@@ -9,5 +9,7 @@ namespace Model.Appsettings
     public class DbConnections
     {
         public string JobCrawlerDb { get; set; }
+        public string StockCrawlerDb { get; set; }
+        
     }
 }

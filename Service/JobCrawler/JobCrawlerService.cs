@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Model;
 using Model.JobCrawler;
 using Model.JobCrawler.Entity;
@@ -113,6 +114,8 @@ namespace Service.JobCrawler
             return body;
         }
 
+
+
         /// <summary>
         /// 同步公司資料
         /// </summary>
@@ -120,7 +123,7 @@ namespace Service.JobCrawler
         private async Task SyncCompAsync(IEnumerable<JobResponseModel.List> companys)
         {
             var now = DateTime.Now;
-            var dbCompanies = await Task.Run(() => { return _dbContext.Companies.Where(x => companys.Select(y => y.custNo).Contains(x.No)).ToList(); });
+            var dbCompanies = await _dbContext.Companies.Where(x => companys.Select(y => y.custNo).Contains(x.No)).ToListAsync();
 
             var taskList = companys.Select(item => Task.Run(async () =>
             {
@@ -161,7 +164,7 @@ namespace Service.JobCrawler
         /// <param name="jobs"></param>
         private async Task SyncVacancyAsync(IEnumerable<JobResponseModel.List> jobs)
         {
-            var dbVacancies = await Task.Run(() => { return _dbContext.Vacancies.Where(x => !x.IsDelete && jobs.Select(y => y.jobNo).Contains(x.No)).ToList(); });
+            var dbVacancies = await _dbContext.Vacancies.Where(x => !x.IsDelete && jobs.Select(y => y.jobNo).Contains(x.No)).ToListAsync(); ;
 
             var taskList = jobs.Select(item => Task.Run(async () =>
                {

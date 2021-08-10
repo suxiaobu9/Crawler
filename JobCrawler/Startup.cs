@@ -7,8 +7,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Model.Appsettings;
 using Model.JobCrawler.Entity;
+using Model.StockCrawler.Entity;
 using Service;
 using Service.JobCrawler;
+using Service.StockCrawler;
 
 namespace JobCrawler
 {
@@ -26,7 +28,9 @@ namespace JobCrawler
         {
             services.Configure<DbConnections>(Configuration.GetSection("ConnectionStrings"));
             services.AddTransient<JobCrawlerDb>();
+            services.AddTransient<StockCrawlerDb>();
             services.AddTransient<ICrawlerService, JobCrawlerService>();
+            services.AddTransient<ICrawlerService, StockCrawlerService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -44,7 +48,7 @@ namespace JobCrawler
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "JobCrawler v1"));
             }
-            
+
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseHttpsRedirection();
